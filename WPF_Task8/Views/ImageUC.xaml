@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="WPF_Task8.Views.ImageUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_Task8.Views"
+             mc:Ignorable="d" 
+             Margin="20"
+             d:DesignHeight="100" 
+             d:DesignWidth="200"
+             Cursor="Hand"
+             Height="100"
+             AllowDrop="False"
+             Width="200">
+    <Border BorderBrush="Black"
+            BorderThickness="3">
+        <Grid Background="White">
+            <Image Stretch="Fill"  x:Name="Image" Source="{Binding ImageSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,5,5,4"></Image>
+        </Grid>
+    </Border>
+    <UserControl.InputBindings>
+        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ImageDoubleClickCommand}"></MouseBinding>
+    </UserControl.InputBindings>
+</UserControl>

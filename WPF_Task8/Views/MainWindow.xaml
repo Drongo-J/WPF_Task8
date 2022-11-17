@@ -1,0 +1,179 @@
+﻿<Window x:Class="WPF_Task8.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Task8"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        mc:Ignorable="d" 
+        Title="Photos" 
+        Height="550" 
+        Width="1000"
+        WindowStyle="ThreeDBorderWindow">
+    <Window.Resources>
+        <Style x:Key="{x:Type Menu}"
+       TargetType="{x:Type Menu}">
+            <Setter Property="OverridesDefaultStyle"
+          Value="True" />
+            <Setter Property="SnapsToDevicePixels"
+          Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Menu}">
+                        <Border BorderThickness="1">
+                            <Border.BorderBrush>
+                                <LinearGradientBrush StartPoint="0,0"
+                                 EndPoint="0,1">
+                                    <LinearGradientBrush.GradientStops>
+                                        <GradientStopCollection>
+                                            <GradientStop Color="{DynamicResource BorderLightColor}"
+                                Offset="0.0" />
+                                            <GradientStop Color="{DynamicResource BorderDarkColor}"
+                                Offset="1.0" />
+                                        </GradientStopCollection>
+                                    </LinearGradientBrush.GradientStops>
+                                </LinearGradientBrush>
+
+                            </Border.BorderBrush>
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0.5,1"
+                                 StartPoint="0.5,0">
+                                    <GradientStop Color="{DynamicResource ControlLightColor}"
+                            Offset="0" />
+                                    <GradientStop Color="{DynamicResource ControlMediumColor}"
+                            Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <StackPanel ClipToBounds="True"
+                      Orientation="Horizontal"
+                      IsItemsHost="True" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Menu>
+                <MenuItem Header="File"
+                          Height="40"
+                          Width="100" 
+                          Cursor="Hand"
+                          FontSize="30">
+                    <MenuItem.Icon>
+                        <Image Source="\Images\file.png" Margin="0,0,-8,-4"></Image>
+                    </MenuItem.Icon>
+
+                    <!--<MenuItem Header="Open"
+                              Cursor="Hand"
+                              FontSize="10">
+                    </MenuItem>-->
+
+                    <MenuItem Header="New"
+                              Cursor="Hand"
+                              FontSize="10">
+                    </MenuItem>
+
+                    <MenuItem Header="Open"
+                              Cursor="Hand"
+                              FontSize="10">
+                    </MenuItem>
+
+
+                    <MenuItem Header="Save"
+                              Cursor="Hand"
+                              FontSize="10">
+                    </MenuItem>
+
+
+                    <MenuItem Header="Save AS"
+                              Cursor="Hand"
+                              FontSize="10">
+                    </MenuItem>
+                </MenuItem>
+
+            
+                <MenuItem Header="Edit"
+                          Height="40"
+                          Width="100" 
+                          Cursor="Hand"
+                          FontSize="30">
+                    <MenuItem.Icon>
+                        <Image Source="\Images\edit.png" Margin="-1,-1,-6,-5"></Image>
+                    </MenuItem.Icon>
+                    <MenuItem Header="Add Image"
+                              Cursor="Hand"
+                              FontSize="10"
+                              Command="{Binding AddImageCommand}">
+                    </MenuItem>
+
+                    <!--<MenuItem Header="Add Folder"
+                              Cursor="Hand"
+                              FontSize="10">
+                    </MenuItem>-->
+                </MenuItem>
+
+                <MenuItem Header="View" 
+                          Height="40" 
+                          Width="100" 
+                          Cursor="Hand"
+                          FontSize="30"
+                          x:Name="ViewMenuItem">
+                    <MenuItem.Icon>
+                        <Image Source="\Images\view.png" Margin="0,0,-8,-9"></Image>
+                    </MenuItem.Icon>
+                    <MenuItem Header="Small Icons"
+                              Cursor="Hand"
+                              IsCheckable="True"
+                              FontSize="10"
+                              Command="{Binding SmallIconsCommand}">
+                    </MenuItem>
+                    <MenuItem Header="Medium Icons"
+                              Cursor="Hand"
+                              FontSize="10"
+                              IsChecked="True"
+                              IsCheckable="True"
+                              Command="{Binding MediumIconsCommand}">
+                    </MenuItem>
+                    <MenuItem Header="Large Icons"
+                              Cursor="Hand"
+                              IsCheckable="True"
+                              FontSize="10"
+                              Command="{Binding LargeIconsCommand}">
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="About"
+                          Height="40" 
+                          Width="115" 
+                          FontSize="30">
+                    <MenuItem.Icon>
+                        <Image Source="\Images\about.png" Margin="0,0,-8,-9"></Image>    
+                    </MenuItem.Icon>
+                </MenuItem>
+            </Menu>
+        </Grid>
+
+        <Grid Grid.Row="1">
+
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Auto">
+                <WrapPanel x:Name="ImagesWrapPanel"
+                           AllowDrop="True"
+                           Background="White">
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Drop">
+                            <ei:CallMethodAction TargetObject="{Binding}" MethodName="DropEvent"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </WrapPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>
